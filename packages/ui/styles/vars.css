@@ -1,0 +1,25 @@
+:root {
+  --max-width: 1200px;
+
+  --color-text: var(--text1-light);
+  --color-text-weak: var(--text2-light);
+  --color-text-weakest: var(--text3-light);
+  --color-text-green: #00bf36;
+  --color-text-red: #f44336;
+
+  --color-primary: var(--indigo-400-accent);
+  --color-primary-light: var(--indigo-400-accent);
+  --color-primary-dark: var(--indigo-700-accent);
+
+  --header-background-color: var(--grey-50);
+  --header-border-color: var(--grey-100);
+
+  --header-nav-button_active-bg-color: white;
+  --header-nav-button_active-color: var(--indigo-400-accent);
+
+  --header-nav-button_active-border-color: var(--grey-300);
+
+  --header-search_bar_active-border-color: var(--indigo-400-accent);
+  --header-search_bar-bg-color: white;
+  --header-search_bar-border-color: var(--grey-200);
+}

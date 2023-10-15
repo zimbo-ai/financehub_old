@@ -1,0 +1,13 @@
+{
+  "eslint.validate": ["javascript", "svelte"],
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "editor.formatOnSave": true,
+  "[svelte]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "editor.formatOnPaste": true
+}
