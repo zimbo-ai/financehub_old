@@ -28,6 +28,7 @@
         color:white;
         border-color: var(--color-primary);
         border-radius: var(--border-radius-xl);
+    
     }
     .btn-variant-primary:hover{
         background-color: var(--color-primary-dark);

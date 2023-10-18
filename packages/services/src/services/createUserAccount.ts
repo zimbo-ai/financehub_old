@@ -1,7 +1,6 @@
 import type { UserAccount, AuthProvider } from 'db/src/models/Accounts/UserAccounts';
 import { ulid } from 'ulid';
 import DB, { Models, type Transaction } from 'db';
-
 interface CreateUserUserAccountParams {
   Tx?: Transaction;
   id?: string;
@@ -24,8 +23,8 @@ export default async function createUserAccount(
 
   try {
     params.Tx
-      ? await params.Tx.insert(Models.UserAccounts).values(account)
-      : await DB.insert(Models.UserAccounts).values(account);
+      ? await params.Tx.insert(Models.UserAccounts).values(account).execute()
+      : await DB.insert(Models.UserAccounts).values(account).execute();
   } catch (e: any) {
     throw e;
   }

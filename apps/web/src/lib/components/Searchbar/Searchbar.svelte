@@ -30,7 +30,8 @@
     :global(.search-btn){
         z-index: 2;
         position: absolute;
-        right:var(--space-sm);
+        right:6px;
+        margin-bottom: 4px;
     }
     :global(.search-input){
         padding: var(--space-sm) calc(var(--space-xl) + var(--space-sm))!important;

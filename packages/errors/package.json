@@ -1,7 +1,6 @@
 {
-  "name": "services",
+  "name": "errors",
   "version": "0.0.0",
-  "description": "Drizzle db conn and models",
   "type": "module",
   "license": "MIT",
   "main": "./src/index.ts",
@@ -9,15 +8,5 @@
   "scripts": {
     "lint": "prettier --check --ignore-path=../../.prettierignore . && eslint \".\"",
     "format": "prettier --write --ignore-path=../../.prettierignore ."
-  },
-  "dependencies": {
-    "db": "workspace:db",
-    "errors": "workspace:errors",
-    "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.28.6",
-    "ulid": "^2.3.0"
-  },
-  "devDependencies": {
-    "drizzle-kit": "^0.19.13"
   }
 }

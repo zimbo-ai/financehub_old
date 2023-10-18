@@ -1,4 +1,4 @@
-import _BaseError from '$lib/errors/errors/_BaseError';
+import Errors from 'errors';
 import { fail, type Action, type RequestHandler, json } from '@sveltejs/kit';
 
 interface ErrorObject {
@@ -22,7 +22,7 @@ export default class ErrorHandler {
   };
 
   private static _getErrorObject: (e: any) => ErrorObject = (e) => {
-    if (e instanceof _BaseError) return e.getError();
+    if (e instanceof Errors._Base) return e.getError();
     console.error(e);
     return {
       status: 500,

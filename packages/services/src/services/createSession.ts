@@ -25,8 +25,9 @@ export default async function createSession(params: CreateUserUserAccountParams)
 
   try {
     params.Tx
-      ? params.Tx.insert(Models.Sessions).values(session)
-      : await DB.insert(Models.Sessions).values(session);
+      ? await params.Tx.insert(Models.Sessions).values(session).execute()
+      : await DB.insert(Models.Sessions).values(session).execute();
+
     params.setCookie('fh_ses', session.id, {
       httpOnly: true,
       path: '/',

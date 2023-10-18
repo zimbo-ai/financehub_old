@@ -1,13 +1,17 @@
 <script lang="ts">
+    import Spinner from "../Spinner/Spinner.svelte";
+
     export let variant:"primary" | "secondary" | "outline"| "default" | "ghost"= "primary";
     export let shape:"rounded" | "pill" | "circle" = "rounded";
     export let size:"sm"|"md"|"lg" = "md";
     export let as:"button" | "a" = "button";
+    export let loading:boolean = false;
 </script>
 
 <svelte:element 
     this="{as}"
     on:click
+    disabled={loading || $$restProps.disabled}
     class={`
     button--variant-${variant} 
     button--shape-${shape} 
@@ -16,7 +20,12 @@
     `}
     href={$$restProps.href}
 >
-    <slot/>
+    {#if loading}
+        <Spinner/>
+    {:else}
+        <slot/>
+    {/if}
+    
 </svelte:element>
 
 <style>
@@ -35,7 +44,6 @@
         --button--variant-primary--hover-bg-color:var(--indigo-700);
         --button--variant-primary--text-color:white;
         --button--variant-primary--focus-outline-color:var(--indigo-100-accent);
-      
 
         --button--variant-ghost--border-color:var(--indigo-50);
         --button--variant-ghost--bg-color:var(--indigo-50);
@@ -69,14 +77,29 @@
         outline:1px solid var(--color-primary);
     }
 
+
+
     /* <------BUTTON SIZES------> */
     .button--size-lg{
         height:var(--input-size-lg);
     }
-    
+    .button--size-sm{
+        height:var(--input-size-sm);
+    }
+
     /* <------BUTTON SIZES------> */
 
     /* <------BUTTON VARIANTS------> */
+
+    .button--variant-default:disabled{
+        opacity: 0.65; 
+        cursor: not-allowed;
+    }
+    .button--variant-default :global(svg){
+        stroke: var(--color-text);
+        fill:var(--color-text);
+        color:var(--color-text);
+    }
     .button--variant-primary{      
         background-color: var(--button--variant-primary--bg-color);
         color:var(--button--variant-primary--text-color);
@@ -91,6 +114,15 @@
     }
     .button--variant-primary:focus{
         outline:1px solid var(--button--variant-primary--focus-outline-color);
+    }
+    .button--variant-primary:disabled{
+        opacity: 0.65; 
+        cursor: not-allowed;
+        background-color: var(--button--variant-primary--bg-color);
+    }
+    .button--variant-primary :global(svg){
+        stroke:var(--button--variant-primary--text-color);
+        fill:var(--button--variant-primary--text-color);
     }
 
     .button--variant-outline{

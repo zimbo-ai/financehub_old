@@ -1,4 +1,4 @@
-import Errors from '$lib/errors';
+import Errors from 'errors';
 import { z } from 'zod';
 
 type ValidateResponse = {
@@ -49,9 +49,8 @@ export default class Validate {
         .min(8)
         .max(1000)
         .regex(/\d/)
-        .regex(/\D/)
+
         // At least one lowercase character
-        // At least one uppercase character
         // At least one digit
         // At least 8 characters long
         .safeParse(password).success

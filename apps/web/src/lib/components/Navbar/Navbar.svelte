@@ -2,9 +2,18 @@
     import { _navPages } from ".";
     import Button from "../Button";
     import Searchbar from "../Searchbar";
-    
+    import Spinner from "../Spinner/Spinner.svelte";
+    import { userProfile } from "$lib/stores/userProfile";
+    import Avatar from "../Avatar/Avatar.svelte";
+    import Text from "../Text/Text.svelte";
+    import ChevronDown from "svelte-material-icons/ChevronDown.svelte"
+    import Cog from "svelte-material-icons/CogOutline.svelte"
+    import Bell from "svelte-material-icons/BellOutline.svelte"
+
     let scrollY:number = 0;
     let activePage:string = "home";
+
+    $:console.log($userProfile)
 </script>
 
 <svelte:window bind:scrollY/>
@@ -27,14 +36,30 @@
             />
         </div>
         
-        <div class="btn-container">
-            <Button as="a" href="/account/login" variant="default">
-                Log In
-            </Button>
-            <Button  as="a" href="/account/signup">
-                Sign Up
-            </Button>
+        <div class="account-container">
+            {#if $userProfile === undefined}
+                <Spinner/>
+            {:else if $userProfile == null}
+                <div class="btn-container">
+                    <Button as="a" href="/account/login" variant="default">
+                        Log In
+                    </Button>
+                    <Button  as="a" href="/account/signup">
+                        Sign Up
+                    </Button>
+                </div>
+            {:else} 
+                <div class="avatar-container">
+                    <Avatar
+                    alt="Profile image for user {$userProfile.username}"
+                    />
+                    <Text>
+                        {$userProfile.username}
+                    </Text>
+                </div>
+            {/if}
         </div>
+
     </div>
 </header>
 <nav>
@@ -75,6 +100,48 @@
         align-items: center;
     }
 
+    .account-container{
+        flex:1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    .avatar-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .avatar-container :global(span){
+        display: flex;
+        align-items: center;
+    } 
+    .avatar-container__button-container{
+        display: flex;
+        gap: var(--space-xs);
+        margin-right: var(--space-md);
+    }
+    .avatar-container__button-container :global(svg){
+        width: 18px !important;
+        height: 18px !important;
+        stroke-width: .1;
+
+    }
+    .account-container :global(span){
+        padding-left: var(--space-md);
+        padding-right: var(--space-xs);
+    }
+    .account-container :global(.chevron){
+        height: var(--size-lg);
+        fill:var(--color-text);
+        
+    }
+    .header__top-section :global(.spinner){
+        fill:var(--color-primary);
+        stroke: var(--color-primary);
+        width: var(--space-md);
+        height: var(--space-md);
+    }
     .btn-container{
         display: flex;
         align-items: center;
@@ -83,7 +150,7 @@
     }
 
     .search-container{
-        flex:1;
+        flex:2;
         align-items: center;
         justify-content: center;
         display: flex;

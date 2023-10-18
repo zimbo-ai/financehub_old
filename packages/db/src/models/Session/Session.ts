@@ -8,7 +8,7 @@ export const Sessions = mysqlTable('sessions', {
   userAccountId: char('user_account_id', { length: 26 }).notNull(),
   userProfileId: char('user_profile_id', { length: 26 }).notNull(),
   createdAt: date('created_at').notNull(),
-  expiresAt: date('created_at').notNull(),
+  expiresAt: date('expires_at').notNull(),
   userAgent: varchar('user_agent', { length: 512 }),
   ipAddress: varchar('ip_address', { length: 64 })
 });

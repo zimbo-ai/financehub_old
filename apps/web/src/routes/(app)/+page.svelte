@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Card from "ui/components/Card/Card.svelte";
-    import Text from "ui/components/Text/Text.svelte";
+    import Card from "$lib/components/Card";
+    import Text from "$lib/components/Text";
     import MarketSummary from "$lib/components/MarketSummary";
     import type { PageData } from "./$types";
     import ArticleDisplay from "$lib/components/ArticleDisplay/ArticleDisplay.svelte";

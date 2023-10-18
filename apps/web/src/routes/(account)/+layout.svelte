@@ -52,6 +52,7 @@
         display: flex;
         flex-direction: column;
         gap: var(--space-sm);
+        margin-top: calc(var(--space-md) *-1);
     }
 
     main :global(.form__button-container button){

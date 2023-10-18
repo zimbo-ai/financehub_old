@@ -1,6 +1,7 @@
 import { ulid } from 'ulid';
 import DB, { Models, type Transaction } from 'db';
 import type { UserProfile } from 'db/src/models/Accounts/UserProfiles';
+import Errors from 'errors';
 
 interface CreateUserProfileParams {
   Tx?: Transaction;
@@ -24,9 +25,17 @@ export default async function createUserProfile(
 
   try {
     params.Tx
-      ? await params.Tx.insert(Models.UserProfiles).values(userProfile)
-      : await DB.insert(Models.UserProfiles).values(userProfile);
+      ? await params.Tx.insert(Models.UserProfiles).values(userProfile).execute()
+      : await DB.insert(Models.UserProfiles).values(userProfile).execute();
   } catch (e: any) {
+    if (e.message.includes('Duplicate entry')) {
+      if (e.message.includes('user_profiles.user_profiles_username_unique')) {
+        throw Errors.Account.usernameTaken();
+      }
+      if (e.message.includes('user_profiles.user_profiles_email_unique')) {
+        throw Errors.Account.emailTaken();
+      }
+    }
     throw e;
   }
 

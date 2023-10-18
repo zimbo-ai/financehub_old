@@ -13,6 +13,7 @@
             on:blur
             on:focus
             on:input
+            disabled={$$restProps.disabled}
             class="
             {error ? "input--error":""} 
             input--variant-{variant} 
@@ -20,7 +21,7 @@
             "
         />
         {#if !error}
-        <Text size="sm" color="weakest" class="input__description">{description}</Text>
+        <Text size="sm" color="weakest" class="input__description {$$restProps.disabled?"disabled":""}">{description}</Text>
         {:else}
         <Text size="sm" color="red" class="input__error">{error}</Text>
         {/if}
@@ -28,14 +29,17 @@
 <style>
 
     div{
+        --input--variant-primary--border-color:var(--grey-200);
+        --input--variant-primary--hover-border-color:var(--grey-300);
+        --input--variant-primary--disabled-border-color:var(--grey-200);
+        --input--variant-primary--disabled-bg-color:var(--grey-50);
+        --input--variant-primary--disabled-text-color:var(--grey-500);
         width: 100%;
         display: flex;
         flex-direction: column;
     }    
 
     input{
-        --input--variant-primary--border-color:var(--grey-200);
-        --input--variant-primary--hover-border-color:var(--grey-300);
         font-weight: 500;
         border-radius: 22px;
         border: 1px solid transparent;
@@ -53,6 +57,7 @@
     :global(.input__description){
         font-style: italic;
         padding-inline: var(--size-md);
+        padding-top: 4px;
     }
     :global(.input__error){
         padding-inline: var(--size-md);
@@ -68,6 +73,17 @@
     .input--variant-primary:focus{
         border-color: var(--header-search_bar_active-border-color);
     }
+
+     :global(.input__description.disabled){
+        color: var(--input--variant-primary--disabled-text-color);
+    }
+    
+    .input--variant-primary:disabled{
+        background-color: var(--input--variant-primary--disabled-bg-color);
+        border-color: var(--input--variant-primary--disabled-border-color);
+        color: var(--input--variant-primary--disabled-text-color);
+    }
+   
     /* <------ INPUT VARIANTS ------> */
     .input--error{
         border-color: var(--color-text-red)!important;

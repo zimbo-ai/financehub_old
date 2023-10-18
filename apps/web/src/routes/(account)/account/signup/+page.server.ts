@@ -1,4 +1,4 @@
-import Errors from '$lib/errors';
+import Errors from 'errors';
 import Validate from '$lib/utils/Validate';
 import type { Action, Actions } from './$types';
 import DB, { type Transaction } from 'db';
@@ -25,29 +25,29 @@ const handler: Action = async ({ request, cookies, getClientAddress, url }) => {
 
   const passwordHash: string = await bcrypt.hash(password, await bcrypt.genSalt());
 
-  try {
-    let ids = {
-      userProfileId: ulid(),
-      accountId: ulid()
-    };
+  let ids = {
+    userProfileId: ulid(),
+    accountId: ulid()
+  };
 
+  try {
     await DB.transaction(async (tx: Transaction) => {
-      const userAccountPromise = Services.createUserAccount({
+      //for some reason, promise.all doesn't work here
+
+      await Services.createUserProfile({
+        Tx: tx,
+        id: ids.userProfileId,
+        username,
+        email
+      });
+      await Services.createUserAccount({
         Tx: tx,
         id: ids.accountId,
         userProfileId: ids.userProfileId,
         passwordHash,
         authProvider: 'CREDENTIALS'
       });
-
-      const userProfilePromise = Services.createUserProfile({
-        Tx: tx,
-        id: ids.userProfileId,
-        username,
-        email
-      });
-
-      const createSessionPromise = Services.createSession({
+      await Services.createSession({
         Tx: tx,
         userProfileId: ids.userProfileId,
         userAccountId: ids.accountId,
@@ -56,18 +56,12 @@ const handler: Action = async ({ request, cookies, getClientAddress, url }) => {
         setCookie: cookies.set
       });
 
-      const createUserPromises: Promise<any>[] = [
-        userAccountPromise,
-        userProfilePromise,
-        createSessionPromise
-      ];
-
-      await Promise.all(createUserPromises);
+      success = true;
+      throw redirect(301, redirectTo);
     });
-    success = true;
-    throw redirect(301, redirectTo);
   } catch (e: any) {
     if (!success) cookies.delete('fh_ses');
+    console.log(e);
     throw e;
   }
 };
