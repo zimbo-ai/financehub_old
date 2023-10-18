@@ -11,7 +11,7 @@ export const _chartOptions: (stockData: StockData) => ChartOptions<'line'> = (st
 
   return {
     borderColor: '#bdbdbd',
-    maintainAspectRatio: true,
+    maintainAspectRatio: false,
     plugins: {
       annotation: {
         annotations: {
@@ -65,7 +65,48 @@ export const _chartData: (stockData: StockData) => ChartData<'line', number[]> =
     datasets: [
       {
         data,
-        fill: false,
+        fill: true,
+        // backgroundColor: change > 0 ? '#00bf3677' : '#f4433677',
+        backgroundColor: (context) => {
+          const bgColorGreen = [
+            '#00bf36aa',
+            '#00bf36aa',
+            '#00bf3688',
+            '#00bf3644',
+            '#00bf3622',
+            '#00bf3611',
+            '#00bf3600'
+          ];
+          const bgColorRed = [
+            '#f44336aa',
+            '#f4433688',
+            '#f4433666',
+            '#f4433644',
+            '#f4433622',
+            '#f4433611',
+            '#f4433600'
+          ];
+
+          if (!context.chart.chartArea) return;
+          const {
+            ctx,
+            data,
+            chartArea: { top, bottom }
+          } = context.chart;
+          const gradient = ctx.createLinearGradient(0, top, 0, bottom);
+
+          if (change > 0)
+            bgColorGreen.forEach((color, index) => {
+              gradient.addColorStop(index / 6, color);
+            });
+
+          if (change < 0)
+            bgColorRed.forEach((color, index) => {
+              gradient.addColorStop(index / 6, color);
+            });
+
+          return gradient;
+        },
         borderWidth: 1,
         borderCapStyle: 'round',
         borderDash: [],

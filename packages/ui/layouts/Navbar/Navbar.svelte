@@ -90,6 +90,7 @@
 
 <style>
     header{
+        --header-border-color:var(--grey-300);
         width: 100%;
         display: flex;
         flex-direction: column;

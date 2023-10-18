@@ -30,7 +30,7 @@
 
 <style>
     a, button{
-        --button--variant-outline--border-color:var(--grey-200);
+        --button--variant-outline--border-color:var(--grey-300);
         --button--variant-outline--active-border-color:var(--indigo-700);
         --button--variant-outline--hover-border-color:var(--indigo-400);
         --button--variant-outline--text-color:var(--text-color);
@@ -83,6 +83,10 @@
     .button--size-lg{
         height:var(--input-size-lg);
     }
+    .button--size-lg :global(svg){
+        height:var(--size-lg);
+        width:var(--size-lg);
+    }
     .button--size-sm{
         height:var(--input-size-sm);
     }
@@ -91,13 +95,14 @@
 
     /* <------BUTTON VARIANTS------> */
 
+    .button--variant-default{
+        background: transparent;
+    }
     .button--variant-default:disabled{
         opacity: 0.65; 
         cursor: not-allowed;
     }
     .button--variant-default :global(svg){
-        stroke: var(--color-text);
-        fill:var(--color-text);
         color:var(--color-text);
     }
     .button--variant-primary{      

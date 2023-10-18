@@ -11,19 +11,40 @@
     export let stockData:StockData[];
     console.log("cool", stockData);
 
+    const scrollStep:number = 10;
+
+    let container:HTMLDivElement;
+    
+    function scrollLeft(){
+        container.scrollLeft -= scrollStep;
+    }
+    function scrollRight(){
+        container.scrollLeft += scrollStep;
+    }
+
 </script>
 
 <div class="market-summary__container">
-    <div class="market-summary__item-container">
+    <div bind:this={container} class="market-summary__item-container">
             {#each stockData as sd}
                 <MarketSummaryItem stockData={sd} />
             {/each}    
     </div>
     <div class="market-summary__nav-button-container">
-        <Button shape="circle" variant="outline">
+        <Button
+            shape="circle" 
+            variant="outline"
+            disabled={container.scrollLeft === 0}
+            on:click={scrollLeft}
+        >
             <ArrowLeft />
         </Button>
-        <Button shape="circle" variant="outline">
+        <Button 
+            shape="circle" 
+            variant="outline"
+            disabled={container.scrollLeft >= container.scrollWidth}
+            on:click={scrollRight}
+        >
             <ArrowRight />
         </Button>
     </div>
@@ -39,11 +60,13 @@
         justify-content: center;
         gap: var(--space-md);
         max-width: var(--max-width);
+        padding-inline: var(--space-md);
+        padding-bottom: var(--space-sm);
     }
     .market-summary__item-container{
         display: flex;        
         width: 100%;
-        overflow-x: hidden;
+        overflow-x: scroll;
         gap: var(--space-md);
     }
     .market-summary__nav-button-container{

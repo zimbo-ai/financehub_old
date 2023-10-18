@@ -1,52 +1,58 @@
 <script lang="ts">
     import Input from "../Input/Input.svelte";
     import Magnify from 'svelte-material-icons/Magnify.svelte'
-    import Button from "../Button/Button.svelte";
 
     export let placeholder:string = "";
 
     let isResultTrayOpen:boolean = false;
 </script>
 
-<div class="container">
-    <div class="top">
+<div class="search-bar">
+    <div class="search-bar__input-container">
         <Magnify/>
         <Input
             on:focus={()=>isResultTrayOpen=true}
             on:blur={()=>isResultTrayOpen=false}
             {placeholder} 
             class="search-input {isResultTrayOpen && "open-tray"}"/>
-            
-        <Button class={`search-btn`}>Search</Button>
     </div>
     {#if isResultTrayOpen}
         <div class="search-results-box">
-            content
+            Trending
         </div>
     {/if}
 </div>
 
 <style>
-    :global(.search-btn){
-        z-index: 2;
-        position: absolute;
-        right:6px;
-        margin-bottom: 4px;
-    }
-    :global(.search-input){
-        padding: var(--space-sm) calc(var(--space-xl) + var(--space-sm))!important;
-        width: 100%;
-    }
-
-    .container{
+    .search-bar{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        max-width: 600px;
-        width: 100%;
         position: relative;
+        max-width: 500px;
+        width: 100%;
     }
+    .search-bar__input-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    :global(.search-bar__input-container svg){
+        width: calc(var(--size-sm) + var(--size-xs));
+        height: calc(var(--size-sm) + var(--size-xs));
+        transform: translate(var(--space-xl), -1px);
+        color:var(--color-text-weakest);
+        position: absolute;
+        left:calc(var(--size-lg) * -1);
+        z-index: 2;
+    }
+    :global(.search-input){
+        padding-inline: calc(var(--space-xl) + var(--space-xs))  var(--space-sm)!important;
+        width: 100%;
+    }
+
 
     .search-results-box{
         position: absolute;
@@ -69,19 +75,6 @@
         border-bottom-right-radius:0px!important;
     }
 
-    .top{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-    }
-    div :global(svg){
-        width: var(--size-lg);
-        height: var(--size-lg);
-        transform: translate(var(--space-xl), 1px);
-        color:var(--text-color-weakest);
-        position: absolute;
-        left:calc(var(--size-lg) * -1);
-        z-index: 2;
-    }
+
+    
 </style>

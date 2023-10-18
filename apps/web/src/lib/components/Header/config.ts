@@ -1,6 +1,4 @@
-import Navbar from './Navbar.svelte';
-
-export const _navPages: {
+export const navPages: {
   title: string;
   slug: string;
   url: string;
@@ -36,5 +34,3 @@ export const _navPages: {
     url: '/'
   }
 ];
-
-export default Navbar;

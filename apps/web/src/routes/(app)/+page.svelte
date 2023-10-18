@@ -19,7 +19,7 @@
         {:then sd} 
         <MarketSummary stockData={sd}/> 
         {:catch error}
-        error
+        An error has occured.
         {/await}
     </section>
 
@@ -165,7 +165,7 @@
             </section>
 
         </div>
-        <Card tag="section" class="live-quotes" size="lg">
+        <Card tag="section" class="live-quotes __hidden-at-768px" size="lg">
             live quotes section
         </Card>
     </div>
@@ -179,13 +179,16 @@
         align-items: center;
         justify-content: center;
         width: 100%;
+        background-color: var(--grey-100);
+        min-width:1000px;
+        overflow-x: auto;
     }
+
 
     .market-summary{
         display: flex;
         align-items: center;
         justify-content: center;
-        height:84px;
         width: 100%;        
     }
     .article-quotes{
@@ -204,18 +207,22 @@
         display: flex;
         flex-direction: column;
         gap: var(--space-md);
+        width: 100%;
     }
+
     :global(.live-quotes){
         flex:1;
+        min-width: 300px;
     }
     
-    :global(.main-articles-container){
+    .main-articles-container{
         flex:3;
         gap: var(--space-md);
         padding: var(--space-md);
         display: flex;
         align-items: center;
         height: 100%;
+        width: 100%;
         justify-content: center;
     }
     
@@ -243,6 +250,48 @@
         display: flex;
         flex-direction: row;
         gap: var(--space-sm);
+    }
+
+    
+  @media(max-width: 768px){
+        main{
+            min-width:300px;
+        }
+        .main-articles-container{
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        .main-articles__side-articles-container{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: var(--space-md);
+        }
+        
+    }
+    @media(min-width: 768px){
+    }
+    @media(max-width: 500px){
+     main{
+            min-width:300px;
+            padding-inline: 0;
+
+        }
+     .main-articles__side-articles-container{
+           display: flex;
+           flex-direction: row;
+           overflow-y: scroll;
+           gap: var(--space-sm);
+    }
+    .main-articles__side-articles-container :global(.featured-article){
+        min-width: 220px;
+    }
+    .other-articles-container{
+        padding-top: 0;
+    }
+
+    }
+    @media(min-width: 500px){
+      
     }
 </style>
 

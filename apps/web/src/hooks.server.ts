@@ -16,17 +16,17 @@ const logger: Handle = async ({ event, resolve }) => {
 };
 
 const session: Handle = async ({ resolve, event }) => {
-  event.locals.session = null;
   const sessionID = event.cookies.get('fh_ses');
-
   if (!sessionID) return await resolve(event);
+
+  event.locals.session = null;
 
   try {
     const session: Session = await Services.getSession(sessionID);
-
     event.locals.session = session;
-  } catch (e: any) {}
+  } catch (e) {}
+
   return await resolve(event);
 };
 
-export const handle = sequence(logger, session);
+export const handle = sequence(session, logger);

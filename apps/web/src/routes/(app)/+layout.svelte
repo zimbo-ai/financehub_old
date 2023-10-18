@@ -1,13 +1,6 @@
 <script lang="ts">
-    import "ui/styles/tokens.css";
-    import "ui/styles/vars.css"
-    import "../../app.css"
-    import '@fontsource/inter';
-	import '@fontsource/inter/400.css';
-	import '@fontsource/inter/500.css';
-	import '@fontsource/inter/600.css';
-	import '@fontsource/inter/700.css';
-    import Navbar from "$lib/components/Navbar";
+   
+    import Navbar from "$lib/components/Header";
 
     
 </script>

@@ -2,10 +2,13 @@ import Services from 'services';
 import type { LayoutServerLoad } from './$types';
 
 const handler: LayoutServerLoad = async ({ locals }) => {
-  if (!locals.session)
+  if (!locals.session) {
     return {
-      userProfile: null
+      lazy: {
+        userProfile: null
+      }
     };
+  }
 
   try {
     return {
@@ -15,7 +18,9 @@ const handler: LayoutServerLoad = async ({ locals }) => {
     };
   } catch (err) {
     return {
-      userProfile: null
+      lazy: {
+        userProfile: null
+      }
     };
   }
 };

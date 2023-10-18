@@ -108,6 +108,7 @@ export default async function getStockData(
 
     return chartData;
   } catch (e) {
+    console.error(e);
     throw e;
   }
 }

@@ -29,8 +29,8 @@
 <style>
 
     div{
-        --input--variant-primary--border-color:var(--grey-200);
-        --input--variant-primary--hover-border-color:var(--grey-300);
+        --input--variant-primary--border-color:var(--grey-300);
+        --input--variant-primary--hover-border-color:var(--grey-400);
         --input--variant-primary--disabled-border-color:var(--grey-200);
         --input--variant-primary--disabled-bg-color:var(--grey-50);
         --input--variant-primary--disabled-text-color:var(--grey-500);
