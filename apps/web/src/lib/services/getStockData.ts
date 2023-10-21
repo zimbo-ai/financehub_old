@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 export type StockDataInterval =
   | '1m'
   | '2m'
@@ -81,7 +83,8 @@ export default async function getStockData(
   };
 
   try {
-    const data = await fetch(requestURL).then((resp) => resp.json());
+    console.error('fetching:', requestURL);
+    const data: any = await fetch(requestURL).then((resp) => resp.json());
 
     //TODO: Add error handling for invalid ticker
 
@@ -105,7 +108,6 @@ export default async function getStockData(
           : null
       });
     });
-
     return chartData;
   } catch (e) {
     console.error(e);

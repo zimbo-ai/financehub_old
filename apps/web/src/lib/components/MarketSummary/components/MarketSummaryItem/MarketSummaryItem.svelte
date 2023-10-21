@@ -18,6 +18,7 @@
     Filler,
     LogarithmicScale
   } from 'chart.js';
+    import imputeMissingVals from '$lib/helpers/imputeMissingVals';
       
   export let stockData:StockData;
 
@@ -35,8 +36,9 @@
     );    
     ChartJS.registry.plugins.register(ChartjsAnnotation);    
 
+    const imputedCloseVals: number[] = imputeMissingVals(stockData.OHLCVData.map((d) => d.close));
     const change: number =
-        ((stockData.OHLCVData[stockData.OHLCVData.length - 1].close - stockData.previousClose) /
+        ((imputedCloseVals[imputedCloseVals.length - 1] - stockData.previousClose) /
             stockData.previousClose) *
         100;
 </script>
@@ -48,7 +50,7 @@
             <a href="/">{stockData.symbol}</a>
         </Text>
         <Text size="sm">
-            {stockData.OHLCVData[stockData.OHLCVData.length -1].close.toFixed(2)}
+            {imputedCloseVals[imputedCloseVals.length - 1].toFixed(2)}
         </Text>
         <Text 
             size="sm"
@@ -102,8 +104,8 @@
     }
     
     .chart-container{
-        height:40px;
-        width: 120px;
+        height:30px;
+        width: 100px;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -2,7 +2,7 @@ import getStockData from '../../lib/services/getStockData';
 import type { PageServerLoad } from './$types';
 
 const handler: PageServerLoad = async () => {
-  const tickers = ['^GSPC', '^DJI', '^IXIC', 'CL=F'];
+  const tickers = ['^GSPC', '^DJI', '^IXIC', '^RUT', 'CL=F', 'EURUSD=X'];
 
   const currentTimestamp = Date.now() / 1000;
 
@@ -10,13 +10,14 @@ const handler: PageServerLoad = async () => {
     return {
       lazy: {
         stockData: Promise.all(
-          tickers.map((ticker) =>
-            getStockData(
-              ticker,
-              Math.floor(currentTimestamp - 24 * 60 * 60 * 7),
-              Math.floor(currentTimestamp),
-              '15m'
-            )
+          tickers.map(
+            async (ticker) =>
+              await getStockData(
+                ticker,
+                Math.floor(currentTimestamp - 24 * 60 * 60),
+                Math.floor(currentTimestamp),
+                '5m'
+              )
           )
         ),
         articles: {

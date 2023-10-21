@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "db": "workspace:db",
-    "errors": "workspace:errors",
     "dotenv": "^16.3.1",
     "drizzle-orm": "^0.28.6",
+    "errors": "workspace:errors",
+    "node-fetch": "^3.3.2",
     "ulid": "^2.3.0"
   },
   "devDependencies": {

@@ -1,25 +1,29 @@
 <script lang="ts">
     import type { StockData } from "../../services/getStockData";
     import Button from "../Button/Button.svelte";
-
-    
     import ArrowLeft from 'svelte-material-icons/ArrowLeft.svelte'
     import ArrowRight from 'svelte-material-icons/ArrowRight.svelte'
-    
     import MarketSummaryItem from "./components/MarketSummaryItem/MarketSummaryItem.svelte";
 
     export let stockData:StockData[];
-    console.log("cool", stockData);
-
-    const scrollStep:number = 10;
-
-    let container:HTMLDivElement;
     
+    const scrollStep:number = 200;
+    let container:HTMLDivElement;
+
+
+
     function scrollLeft(){
-        container.scrollLeft -= scrollStep;
+        container.scroll({
+            left: container.scrollLeft - scrollStep,
+            behavior: 'smooth'
+        })
+        
     }
     function scrollRight(){
-        container.scrollLeft += scrollStep;
+         container.scroll({
+            left: container.scrollLeft + scrollStep,
+            behavior: 'smooth'
+        })
     }
 
 </script>
@@ -34,7 +38,6 @@
         <Button
             shape="circle" 
             variant="outline"
-            disabled={container.scrollLeft === 0}
             on:click={scrollLeft}
         >
             <ArrowLeft />
@@ -42,7 +45,6 @@
         <Button 
             shape="circle" 
             variant="outline"
-            disabled={container.scrollLeft >= container.scrollWidth}
             on:click={scrollRight}
         >
             <ArrowRight />
@@ -59,14 +61,16 @@
         align-items: center;
         justify-content: center;
         gap: var(--space-md);
+        scroll-behavior: smooth;
         max-width: var(--max-width);
         padding-inline: var(--space-md);
         padding-bottom: var(--space-sm);
     }
+
     .market-summary__item-container{
         display: flex;        
         width: 100%;
-        overflow-x: scroll;
+        overflow-x: hidden;
         gap: var(--space-md);
     }
     .market-summary__nav-button-container{
@@ -77,3 +81,16 @@
     }
 </style>
 
+
+<!-- https://query1.finance.yahoo.com/v1/finance/lookup?formatted=true&lang=en-US&region=US&query=msft&type=equity&count=3000&start=0 -->
+
+search?q=zimbabwe&
+lang=en-US&
+region=US&
+quotesCount=6
+&newsCount=2
+&listsCount=2
+&enableFuzzyQuery=false
+&quotesQueryId=tss_match_phrase_query
+&multiQuoteQueryId=multi_quote_single_token_query
+&newsQueryId=news_cie_vespa&enableCb=true&enableNavLinks=true&enableEnhancedTrivialQuery=true&enableResearchReports=true&enableCulturalAssets=true&enableLogoUrl=true&researchReportsCount=2

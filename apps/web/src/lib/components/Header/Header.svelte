@@ -2,11 +2,11 @@
     import { navPages } from "./config";
     import userProfile from "$lib/stores/userProfile";
     import MenuIcon from "svelte-material-icons/Menu.svelte"
-    import MagnifyIcon from "svelte-material-icons/Magnify.svelte"
     import Button from "../Button";
     import Searchbar from "../Searchbar";
     import Avatar from "../Avatar";
     import Text from "../Text";
+    import Overlay from "../Overlay/Overlay.svelte";
     
     let scrollY:number = 0;
     let activePage:string = "home";
@@ -25,10 +25,10 @@
                         width:128px; 
                         height:33px; 
                         border-radius:var(--border-radius-lg); 
-                        background:var(--grey-300);
+                        background:var(--grey-200);
                     "
             >
-                __LOGO__FULL
+                
             </div>
             <div
                 class="__visible-at-768px __hidden-at-500px icon-logo"
@@ -36,10 +36,10 @@
                         width:33px; 
                         height:33px; 
                         border-radius:var(--border-radius-lg); 
-                        background:var(--grey-300);
+                        background:var(--grey-200);
                     "
             >
-                1/2
+                
             </div>
         </div>
         <div class="header__search-bar-container __hidden-at-500px">
@@ -77,10 +77,10 @@
                         width:128px; 
                         height:33px; 
                         border-radius:var(--border-radius-lg); 
-                        background:var(--grey-300);
+                        background:var(--grey-200);
                     "
             >
-                __LOGO__FULL
+                
             </div>
         </div>
         <div class="hamburger __visible-at-768px">

@@ -7,7 +7,7 @@ export const _chartOptions: (stockData: StockData) => ChartOptions<'line'> = (st
 
   const dataMin: number = Math.min(...data);
   const dataMax: number = Math.max(...data);
-  const padding: number = (dataMax - dataMin) * 0.02;
+  const padding: number = (dataMax - dataMin) * 0.1;
 
   return {
     borderColor: '#bdbdbd',
