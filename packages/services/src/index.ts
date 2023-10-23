@@ -1,3 +1,4 @@
+import createArticleSource from './services/createArticleSource';
 import createUserAccount from './services/createUserAccount';
 import createUserProfile from './services/createUserProfile';
 import createSession from './services/createSession';
@@ -13,6 +14,7 @@ class Services {
   public static createSession = createSession;
   public static getSession = getSession;
   public static getUserProfile = getUserProfile;
+  public static createArticleSource = createArticleSource;
 }
 
 export default Services;

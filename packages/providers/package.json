@@ -1,5 +1,5 @@
 {
-  "name": "services",
+  "name": "providers",
   "version": "0.0.0",
   "description": "Drizzle db conn and models",
   "type": "module",
@@ -11,13 +11,6 @@
     "format": "prettier --write --ignore-path=../../.prettierignore ."
   },
   "dependencies": {
-    "db": "workspace:db",
-    "dotenv": "^16.3.1",
-    "drizzle-orm": "^0.28.6",
-    "errors": "workspace:errors",
-    "ulid": "^2.3.0"
-  },
-  "devDependencies": {
-    "drizzle-kit": "^0.19.13"
+    "dotenv": "^16.3.1"
   }
 }
